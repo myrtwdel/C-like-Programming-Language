@@ -1,0 +1,73 @@
+//types
+
+<letters> ::= 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z' 
+| 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z'
+<char> ::=  '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | <letters>
+<string> ::= <char> | <string> <char>
+<varname> ::= <letters> | <varname> <letters> <char>
+<digit> ::= 0 | <nonzero>
+<nonzero> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+<digits> ::= <digit> | <nonzero> <digits>
+<int> ::= '+' <digit> | '+' <digits> | '-' <digit> | '-' <digits>
+<\n> ::= NEWLINE
+
+
+<operator> ::= + | - | * | / | % | ^
+
+<compOperator> ::= == | < | > | != 
+<logicalOperator> ::= 'AND' | 'OR'
+<forOperator> ::= ':='
+
+
+//dhlwseis
+<variable> ::= <int> | <char>
+<vars> ::= <variable> | <variable>, <vars>
+
+<program> ::= 'PROGRAM' <varname> <\n>
+
+<function> ::= 'FUNCTION' <varname> (<vars>) <\n> <functionBody> 'ENDFUNCTION'
+
+<main> ::= 'STARTMAIN' <\n> <mainBody> 'ENDMAIN'
+
+
+
+
+<declarevars> ::= 'INT' <varname>; | 'INT' <varname> = <int>; | 'INT' <varname>'['<digits>']'; | 'CHAR' <varname>; | 'CHAR' <varname> '=' <char>; | 'CHAR' <varname>'['<digits>']';
+
+<functionBody> ::= <blocks> <\n> 'RETURN' <varname> | <blocks> <\n> 'RETURN' <int> | <blocks> <\n> 'RETURN' <char>
+<mainBody> ::= <blocks>
+
+<block> ::= <expressions> | <ifStatement> | <whileLoop> | <forLoop> | <switches> | <functionCall> | <print> | <break>
+<blocks> ::= <block> | <blocks> <block>
+
+<expression> ::= <assignment> | 
+<expressions> ::= <expression> | <expressions> <expression>
+<compExpression> ::= <varname> <compOperator> <varname> | <varname> <compOperator> <int> | <int> <compOperator> <int> | <varname> <compOperator> <char> | <char> <compOperator> <char>
+
+<logicalExpression> ::= (<compExpression> <logicalOperator> <compExpression>) | (<compExpression> <logicalOperator> <logicalExpression>) | ( <logicalExpression> <logicalOperator> <logicalExpression>)
+
+<operation> ::= <int> <operator> <int> | <varname> <operator> <varname> | <varname> <operator> <int> | <int> <operator> <varname> | (<operation>)
+<operations> ::= <operation> <operator> <int> | <operation> <operator> <varname> | <operation> <operator> <operation> | <operation> <operator> <operations>
+
+<assignment> ::= <varname> = <int>; | <varname> = <char>; | <varname> = <operations>; | <varname> = <functionCall>;
+
+
+<whileLoop> ::= 'WHILE' <logicalExpression> <\n> <blocks> <\n> 'ENDWHILE'
+
+<forLoop> ::= 'FOR'<varname> <forOperator> <int> 'TO' <int> 'STEP' <int> <\n> <blocks> 'ENDFOR'
+
+<ifStatement> ::= 'IF' <logicalExpression> <\n> 'THEN' <blocks> 'ENDIF' | 'IF' <logicalExpression> <\n> 'THEN' <blocks> <elseif> 'ELSE' <\n> <blocks> 'ENDIF'
+<elseif> ::= 'ELSEIF' <logicalExpression> <\n> <blocks> | 'ELSEIF' <logicalExpression> <\n> <blocks> <elseif> 
+
+<switches> ::= 'SWITCH'(<varname>) <\n> <cases> <\n> 'DEFAULT:' <\n> <blocks> <\n> 'ENDSWITCH' | 'SWITCH'(<varname>) <\n> <cases> <\n> 'ENDSWITCH'
+<case> ::= 'CASE' <int> <\n> <blocks>| 'CASE' <char> <\n> <blocks> | 'CASE' <operator> <\n> <blocks>
+<cases> ::= <case> | <cases> <case>
+
+<functionCall> ::= <varname> (<vars>);
+
+<print> ::= 'PRINT' ("<text>"); | 'PRINT' ("<text>", <varname>);
+<text> ::= <string> | <text> <string>
+
+<comments> ::= '%'<text>
+
+<break> ::= 'BREAK';
