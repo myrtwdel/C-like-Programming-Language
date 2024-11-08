@@ -1,0 +1,81 @@
+PROGRAM test
+
+TYPEDEF STRUCT book
+VARS[
+INTEGER pages;
+]
+book ENDSTRUCT
+
+FUNCTION F(C)		/*FUNCTION DECLARATIONS HERE*/
+VARS[
+INTEGER Y[2], V, T[3];
+CHAR T;
+INTEGER I;
+]
+
+I=9;
+BREAK;
+RETURN T;
+END_FUNCTION
+
+
+/*
+MULTILINE
+COMMENTS
+*/
+
+
+STARTMAIN			/*MAIN*/
+
+VARS[
+book book1, bookcase[2];
+INTEGER Y[2], V, T[3];
+CHAR T;
+INTEGER I, a, b;
+]
+
+V=1;						/*ASSIGNMENT*/
+F(V);						/*FUNCTION CALL*/
+
+
+
+IF(a>1 AND b<3)					/*IF-STATEMENT*/
+THEN
+a=100;
+
+ELSEIF(a>1 AND b>3)
+F();
+
+ELSE
+book1.pages=100;
+ENDIF
+
+
+
+
+WHILE(a<3)					/*WHILE LOOP*/
+a=a+1;
+ENDWHILE
+
+FOR b:=1 TO 100 STEP 1				/*FOR LOOP*/
+a = V + 24 + (7 + 1 / (2^5));
+ENDFOR
+
+
+SWITCH(e)
+
+CASE(1)
+a=1;
+
+CASE('two')
+a=2;
+
+CASE(a<b)
+a=10;
+
+ENDSWITCH
+
+
+PRINT('To programma trexei epituxws', [a])	/*PRINT*/
+
+ENDMAIN
